@@ -164,7 +164,7 @@ class Software(QObject):
                         'tor'
                     ]
                     for tor_file in tor_files:
-                        file_name = 'tor-browser_en-US/Browser/TorBrowser/Tor/' + tor_file
+                        file_name = 'tor-browser_ALL/Browser/TorBrowser/Tor/' + tor_file
                         destination_file = os.path.join(self.downloaded_bin_path, tor_file)
                         extracted_file = tar.extractfile(file_name)
                         with open(destination_file, 'wb') as f:
