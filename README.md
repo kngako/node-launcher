@@ -36,11 +36,11 @@ https://github.com/PierreRochard/node-launcher/releases
 
 Review the contributing.md file https://github.com/PierreRochard/node-launcher/blob/master/contributing.md
 
-Install Python3.7+
+Install python3.10+
 
 macOS: `brew install python3 dbus dbus-glib`
 
-Linux: `sudo apt install python3.7-venv libdbus-glib-1-dev python3.7-dev`
+Linux: `sudo apt install python3.10-venv libdbus-glib-1-dev python3.10-dev`
 
 For Windows see https://medium.com/@pierre_rochard/node-launcher-developer-setup-on-windows-5ba6e0fbb38a
 
@@ -48,11 +48,11 @@ For macOS and Linux:
 
 0. `git clone https://github.com/PierreRochard/node-launcher`
 1. `cd node-launcher`
-2. `python3.7 -m venv venv`
+2. `python3.10 -m venv venv`
 3. `. venv/bin/activate`
 4. `pip3.7 install -r requirements.txt`
-5. `python setup.py develop`
-6. `python run.py`
+5. `python3.10 setup.py develop`
+6. `python3.10 run.py`
 
 # Testing
 
