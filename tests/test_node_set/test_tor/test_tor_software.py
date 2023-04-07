@@ -19,7 +19,7 @@ class TestTorSoftware(object):
     @pytest.mark.slow
     def test_linux_update(self, tor_software, qtbot):
         tor_software.compressed_suffix = '.tar.xz'
-        tor_software.download_name = f'tor-browser-linux64-{tor_software.release_version}_en-US'
+        tor_software.download_name = f'tor-browser-linux64-{tor_software.release_version}_ALL'
         tor_software.download_url = f'{TOR_WEBSITE}{tor_software.release_version}/' \
             f'{tor_software.download_destination_file_name}'
         shutil.rmtree(tor_software.version_path,
