@@ -13,8 +13,11 @@ from grpc._plugin_wrapping import (_AuthMetadataContext,
 
 from node_launcher.constants import LND_DIR_PATH, OPERATING_SYSTEM
 from node_launcher.logging import log
-from . import rpc_pb2 as ln
-from . import rpc_pb2_grpc as lnrpc
+from . import lightning_pb2 as ln
+from . import lightning_pb2_grpc as lnrpc
+
+from . import walletunlocker_pb2 as walletunlocker
+from . import walletunlocker_pb2_grpc as walletunlockerrpc
 
 os.environ['GRPC_SSL_CIPHER_SUITES'] = 'HIGH+ECDSA'
 
@@ -139,8 +142,8 @@ class LndClient(object):
         # noinspection PyCallingNonCallable
         callback([('macaroon', macaroon)], None)
 
-    def generate_seed(self, seed_password: str = None) -> ln.GenSeedResponse:
-        request = ln.GenSeedRequest()
+    def generate_seed(self, seed_password: str = None) -> walletunlocker.GenSeedResponse:
+        request = walletunlocker.GenSeedRequest()
         if seed_password is not None:
             request.aezeed_passphrase = seed_password.encode('latin1')
         response = self.wallet_unlocker.GenSeed(request)
@@ -149,8 +152,8 @@ class LndClient(object):
     def initialize_wallet(self, wallet_password: str,
                           seed: List[str],
                           seed_password: str = None,
-                          recovery_window: int = None) -> ln.InitWalletResponse:
-        request = ln.InitWalletRequest()
+                          recovery_window: int = None) -> walletunlocker.InitWalletResponse:
+        request = walletunlocker.InitWalletRequest()
         request.wallet_password = wallet_password.encode('latin1')
         request.cipher_seed_mnemonic.extend(seed)
         if seed_password is not None:
@@ -160,8 +163,8 @@ class LndClient(object):
         response = self.wallet_unlocker.InitWallet(request)
         return response
 
-    def unlock(self, wallet_password: str) -> ln.UnlockWalletResponse:
-        request = ln.UnlockWalletRequest()
+    def unlock(self, wallet_password: str) -> walletunlocker.UnlockWalletResponse:
+        request = walletunlocker.UnlockWalletRequest()
         request.wallet_password = wallet_password.encode('latin1')
         response = self.wallet_unlocker.UnlockWallet(request)
         return response
