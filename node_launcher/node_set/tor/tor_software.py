@@ -19,7 +19,7 @@ class TorSoftware(Software):
         )
         if IS_MACOS:
             self.compressed_suffix = '.dmg'
-            self.download_name = f'TorBrowser-{self.release_version}-osx64_ALL'
+            self.download_name = f'TorBrowser-{self.release_version}-macos_ALL'
         elif IS_LINUX:
             self.compressed_suffix = '.tar.xz'
             self.download_name = f'tor-browser-linux64-{self.release_version}_ALL'

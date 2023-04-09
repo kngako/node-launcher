@@ -18,7 +18,7 @@ class BitcoindSoftware(Software):
         if IS_WINDOWS:
             os_name = 'win64'
         elif IS_MACOS:
-            os_name = 'osx64'
+            os_name = 'arm64-apple-darwin'
         elif IS_LINUX:
             os_name = 'x86_64-linux-gnu'
         else:
