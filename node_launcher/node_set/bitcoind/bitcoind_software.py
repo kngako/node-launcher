@@ -18,7 +18,7 @@ class BitcoindSoftware(Software):
         if IS_WINDOWS:
             os_name = 'win64'
         elif IS_MACOS:
-            os_name = 'arm64-apple-darwin'
+            os_name = 'x86_64-apple-darwin'
         elif IS_LINUX:
             os_name = 'x86_64-linux-gnu'
         else:
@@ -51,10 +51,11 @@ class BitcoindSoftware(Software):
 
     @property
     def uncompressed_directory_name(self) -> str:
-        if IS_LINUX:
+        if IS_LINUX or IS_MACOS:
             name = '-'.join(self.download_name.split('-')[0:2])
         else:
             name = '-'.join(self.download_name.split('-')[:-1])
+            print(name)
             if name.count('.') == 3:
                 name = '.'.join(name.split('.')[:-1])
         return name

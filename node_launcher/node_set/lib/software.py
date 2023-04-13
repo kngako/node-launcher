@@ -11,6 +11,7 @@ from PySide2.QtCore import QThreadPool, QObject, Signal
 from node_launcher.constants import (
     NODE_LAUNCHER_DATA_PATH,
     OPERATING_SYSTEM,
+    IS_MACOS,
     IS_WINDOWS
 )
 from node_launcher.gui.components.thread_worker import Worker
@@ -195,11 +196,16 @@ class Software(QObject):
                 '/Volumes', 'Tor Browser', 'Tor Browser.app', 'Contents',
                 'MacOS', 'Tor', 'tor.real'
             )
+            libevent_library_path = os.path.join(
+                '/Volumes', 'Tor Browser', 'Tor Browser.app', 'Contents',
+                'MacOS', 'Tor', 'libevent-2.1.7.dylib'
+            )
             log.debug('Copying app from disk image',
                       app_source_path=app_source_path,
                       destination=self.downloaded_bin_path)
             os.makedirs(self.downloaded_bin_path, exist_ok=True)
             shutil.copy(src=app_source_path, dst=self.downloaded_bin_path)
+            shutil.copy(src=libevent_library_path, dst=self.downloaded_bin_path)
             disk_image_path = '/Volumes/Tor\ Browser'
             log.debug('Detaching disk image', disk_image_path=disk_image_path)
             subprocess.run([
@@ -270,4 +276,8 @@ class Software(QObject):
     def uncompressed_directory_name(self) -> str:
         if self.software_name == 'tor':
             return self.software_name
+        
+        if self.software_name == 'bitcoind':
+            return f'bitcoin-{self.release_version}'
+            
         return self.download_name
