@@ -150,6 +150,9 @@ class Software(QObject):
                 log.debug('BadZipFile', destination=destination, exc_info=True)
                 os.remove(source)
                 self.update()
+        elif IS_WINDOWS:
+            with tarfile.open(source) as tar:
+                tar.extractall(path=destination)
 
         elif 'tar' in self.compressed_suffix:
             with tarfile.open(source) as tar:
@@ -212,6 +215,8 @@ class Software(QObject):
         )
         os.makedirs(destination_directory, exist_ok=True)
         for executable in os.listdir(source_directory):
+            if executable == 'pluggable_transports':
+                continue
             source = os.path.join(source_directory, executable)
             destination = os.path.join(destination_directory, executable)
             if os.path.exists(destination):
@@ -245,6 +250,9 @@ class Software(QObject):
 
     @property
     def downloaded_bin_path(self) -> str:
+        if self.software_name == 'tor':
+            return self.version_path
+            
         return os.path.join(self.version_path, 'bin')
 
     @property
@@ -260,4 +268,6 @@ class Software(QObject):
 
     @property
     def uncompressed_directory_name(self) -> str:
+        if self.software_name == 'tor':
+            return self.software_name
         return self.download_name

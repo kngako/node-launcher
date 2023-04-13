@@ -6,7 +6,6 @@ from typing import Dict
 NODE_LAUNCHER_RELEASE = '.'.join(map(str, (7, 1, 0)))
 
 TARGET_TOR_RELEASE = '12.0.4'
-TARGET_WINDOWS_TOR_VERSION = '0.4.0.5'
 TOR_WEBSITE = 'http://www.torproject.org/dist/torbrowser/'
 
 TARGET_BITCOIN_RELEASE = 'v24.0.1'

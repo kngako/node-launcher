@@ -4,7 +4,6 @@ from node_launcher.constants import (
     IS_WINDOWS,
     IS_MACOS,
     IS_LINUX,
-    TARGET_WINDOWS_TOR_VERSION,
     TARGET_TOR_RELEASE,
     TOR_WEBSITE
 )
@@ -24,7 +23,8 @@ class TorSoftware(Software):
             self.compressed_suffix = '.tar.xz'
             self.download_name = f'tor-browser-linux64-{self.release_version}_ALL'
         elif IS_WINDOWS:
-            self.download_name = f'tor-win64-{TARGET_WINDOWS_TOR_VERSION}'
+            self.compressed_suffix = ".tar.gz"
+            self.download_name = f'tor-expert-bundle-{self.release_version}-windows-x86_64'
 
         self.download_url = f'{TOR_WEBSITE}{self.release_version}/{self.download_destination_file_name}'
 
